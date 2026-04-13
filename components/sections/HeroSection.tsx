@@ -1,59 +1,147 @@
 import Link from "next/link";
-import Button from "@/components/ui/Button";
 
 export default function HeroSection() {
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Background */}
-      <div className="absolute inset-0 gradient-burgundy" />
-
-      {/* Texture overlay */}
-      <div
-        className="absolute inset-0 opacity-10"
+    <section
+      style={{
+        minHeight: "100vh",
+        display: "flex",
+        alignItems: "center",
+        position: "relative",
+        overflow: "hidden",
+        backgroundColor: "#1a1a1a",
+      }}
+    >
+      {/* Video Background */}
+      <video
+        autoPlay
+        muted
+        loop
+        playsInline
         style={{
-          backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
+          position: "absolute",
+          inset: 0,
+          width: "100%",
+          height: "100%",
+          objectFit: "cover",
+          opacity: 0.65,
+        }}
+      >
+        <source src="/adornvideo.mp4" type="video/mp4" />
+      </video>
+
+      {/* Gradient Overlay */}
+      <div
+        style={{
+          position: "absolute",
+          inset: 0,
+          background: "linear-gradient(to right, rgba(0,0,0,0.80) 0%, rgba(0,0,0,0.4) 60%, transparent 100%)",
         }}
       />
 
       {/* Content */}
-      <div className="relative z-10 container-custom text-center text-white py-32">
-        {/* Eyebrow */}
-        <p className="text-xs tracking-[0.4em] uppercase text-burgundy-200 mb-6 animate-fade-in">
-          Lagos, Nigeria · Est. 2020
-        </p>
+      <div
+        className="container-custom"
+        style={{ position: "relative", zIndex: 10, paddingTop: "8rem", paddingBottom: "6rem" }}
+      >
+        <div style={{ maxWidth: "700px" }}>
 
-        {/* Headline */}
-        <h1 className="font-serif text-display-md md:text-display-lg lg:text-display-xl text-white mb-6 animate-slide-up text-balance">
-          Where Fashion
-          <br />
-          <span className="italic text-burgundy-200">Meets Artistry</span>
-        </h1>
+          {/* Eyebrow */}
+          <div style={{ display: "flex", alignItems: "center", gap: "1rem", marginBottom: "1.5rem" }}>
+            <div style={{ width: "40px", height: "1px", backgroundColor: "#C9A84C" }} />
+            <span style={{ fontSize: "0.7rem", letterSpacing: "0.35em", textTransform: "uppercase", color: "#C9A84C", fontWeight: 500 }}>
+              Lagos, Ibadan Nigeria · Est. 2020
+            </span>
+          </div>
 
-        {/* Subheadline */}
-        <p className="text-base md:text-lg text-burgundy-100 max-w-xl mx-auto mb-10 leading-relaxed animate-fade-in">
-          Discover premium ready-to-wear collections and world-class fashion
-          education — all under one elegant roof.
-        </p>
+          {/* Headline */}
+          <h1 className="hero-title" style={{ color: "white", marginBottom: "1.5rem" }}>
+            Where
+            <br />
+            <span style={{ color: "#C9A84C", fontStyle: "italic" }}>Fashion</span>
+            <br />
+            Meets Art
+          </h1>
 
-        {/* CTAs */}
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 animate-slide-up">
-          <Link href="/shop">
-            <Button size="lg" variant="secondary" className="bg-white text-wine-DEFAULT hover:bg-cream-dark min-w-[180px]">
+          {/* Subheadline */}
+          <p style={{
+            fontSize: "1rem",
+            color: "rgba(255,255,255,0.75)",
+            lineHeight: 1.8,
+            maxWidth: "480px",
+            marginBottom: "2.5rem",
+          }}>
+            Discover premium ready-to-wear collections and world-class fashion education — all under one elegant roof.
+          </p>
+
+          {/* CTAs */}
+          <div style={{ display: "flex", flexWrap: "wrap", gap: "1rem", alignItems: "center" }}>
+            <Link href="/shop" className="btn-white">
               Shop Collection
-            </Button>
-          </Link>
-          <Link href="/academy">
-            <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-wine-DEFAULT min-w-[180px]">
-              Explore Academy
-            </Button>
-          </Link>
+            </Link>
+            <Link
+              href="/academy"
+              style={{
+                fontSize: "0.72rem",
+                letterSpacing: "0.15em",
+                textTransform: "uppercase",
+                fontWeight: 500,
+                color: "white",
+                display: "flex",
+                alignItems: "center",
+                gap: "0.5rem",
+                borderBottom: "1px solid rgba(255,255,255,0.4)",
+                paddingBottom: "2px",
+              }}
+            >
+              Explore Academy →
+            </Link>
+          </div>
         </div>
 
-        {/* Scroll indicator */}
-        <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-burgundy-300">
-          <span className="text-[10px] tracking-[0.3em] uppercase">Scroll</span>
-          <div className="w-px h-10 bg-burgundy-400 animate-pulse" />
+        {/* Bottom Stats */}
+        <div
+          style={{
+            position: "absolute",
+            bottom: "3rem",
+            right: "1.5rem",
+            display: "flex",
+            gap: "3rem",
+          }}
+          className="hidden md:flex"
+        >
+          {[
+            { value: "500+", label: "Happy Clients" },
+            { value: "200+", label: "Designs" },
+            { value: "150+", label: "Graduates" },
+          ].map((stat) => (
+            <div key={stat.label} style={{ textAlign: "center" }}>
+              <p style={{ fontFamily: "var(--font-playfair), Georgia, serif", fontSize: "1.75rem", fontWeight: 700, color: "white", lineHeight: 1 }}>
+                {stat.value}
+              </p>
+              <p style={{ fontSize: "0.65rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "rgba(255,255,255,0.5)", marginTop: "0.25rem" }}>
+                {stat.label}
+              </p>
+            </div>
+          ))}
         </div>
+      </div>
+
+      {/* Scroll Indicator */}
+      <div
+        style={{
+          position: "absolute",
+          bottom: "2rem",
+          left: "50%",
+          transform: "translateX(-50%)",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          gap: "0.5rem",
+        }}
+      >
+        <span style={{ fontSize: "0.6rem", letterSpacing: "0.3em", textTransform: "uppercase", color: "rgba(255,255,255,0.4)" }}>Scroll</span>
+        <div style={{ width: "1px", height: "40px", backgroundColor: "rgba(255,255,255,0.3)" }} />
       </div>
     </section>
   );

@@ -3,8 +3,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Menu, X, ShoppingBag } from "lucide-react";
-import { cn } from "@/lib/utils";
+import { Menu, X } from "lucide-react";
 
 const navLinks = [
   { href: "/", label: "Home" },
@@ -18,9 +17,10 @@ export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
+  const isHome = pathname === "/";
 
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 20);
+    const handleScroll = () => setScrolled(window.scrollY > 50);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
@@ -29,104 +29,163 @@ export default function Navbar() {
     setIsOpen(false);
   }, [pathname]);
 
+  const isTransparent = isHome && !scrolled;
+
   return (
     <header
-      className={cn(
-        "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
-        scrolled
-          ? "bg-white shadow-sm border-b border-gray-100"
-          : "bg-transparent"
-      )}
+      style={{
+        position: "fixed",
+        top: 0,
+        left: 0,
+        right: 0,
+        zIndex: 50,
+        transition: "all 0.3s ease",
+        backgroundColor: isTransparent ? "transparent" : "white",
+        borderBottom: isTransparent ? "none" : "1px solid #f0ebe3",
+      }}
     >
-      <nav className="container-custom flex items-center justify-between h-16 md:h-20">
+      <nav
+        className="container-custom"
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+          height: "72px",
+        }}
+      >
         {/* Logo */}
-        <Link href="/" className="flex flex-col leading-none">
-          <span className="font-serif text-xl md:text-2xl font-bold text-wine-DEFAULT tracking-wide">
-            ADORN
-          </span>
-          <span className="text-[10px] tracking-[0.3em] text-gray-500 uppercase">
-            Couture
-          </span>
+        <Link href="/" style={{ display: "flex", alignItems: "center" }}>
+          <img
+            src="/tolani-logo.png"
+            alt="Adorn Couture"
+            style={{
+              height: isTransparent ? "80px" : "65px",
+              width: "auto",
+              objectFit: "contain",
+              transition: "all 0.3s",
+              filter: isTransparent ? "brightness(0) invert(1)" : "none",
+            }}
+          />
         </Link>
 
         {/* Desktop Nav */}
-        <ul className="hidden md:flex items-center gap-8">
+        <ul
+          style={{
+            display: "flex",
+            alignItems: "center",
+            gap: "2.5rem",
+            listStyle: "none",
+          }}
+          className="hidden md:flex"
+        >
           {navLinks.map((link) => (
             <li key={link.href}>
               <Link
                 href={link.href}
-                className={cn(
-                  "text-sm tracking-wide transition-colors duration-200 hover:text-wine-DEFAULT relative group",
-                  pathname === link.href
-                    ? "text-wine-DEFAULT font-medium"
-                    : "text-gray-600"
-                )}
+                style={{
+                  fontSize: "0.78rem",
+                  letterSpacing: "0.1em",
+                  textTransform: "uppercase",
+                  fontWeight: 500,
+                  color: isTransparent
+                    ? "rgba(255,255,255,0.9)"
+                    : pathname === link.href
+                    ? "#722F37"
+                    : "#4b5563",
+                  transition: "color 0.2s",
+                  borderBottom:
+                    pathname === link.href ? "1px solid #722F37" : "none",
+                  paddingBottom: "2px",
+                }}
               >
                 {link.label}
-                <span
-                  className={cn(
-                    "absolute -bottom-1 left-0 h-px bg-wine-DEFAULT transition-all duration-200",
-                    pathname === link.href ? "w-full" : "w-0 group-hover:w-full"
-                  )}
-                />
               </Link>
             </li>
           ))}
         </ul>
 
-        {/* Desktop CTA */}
-        <div className="hidden md:flex items-center gap-4">
+        {/* CTA */}
+        <div className="hidden md:flex">
           <Link
             href="/academy/apply"
-            className="text-sm font-medium bg-wine-DEFAULT text-white px-5 py-2.5 hover:bg-wine-dark transition-colors duration-200 tracking-wide"
+            style={{
+              fontSize: "0.72rem",
+              letterSpacing: "0.15em",
+              textTransform: "uppercase",
+              fontWeight: 600,
+              padding: "0.6rem 1.5rem",
+              backgroundColor: isTransparent ? "white" : "#722F37",
+              color: isTransparent ? "#722F37" : "white",
+              transition: "all 0.3s",
+            }}
           >
             Apply Now
           </Link>
         </div>
 
-        {/* Mobile Menu Button */}
+        {/* Mobile Toggle */}
         <button
           onClick={() => setIsOpen(!isOpen)}
-          className="md:hidden p-2 text-gray-700 hover:text-wine-DEFAULT transition-colors"
-          aria-label="Toggle menu"
+          className="md:hidden"
+          style={{
+            color: isTransparent ? "white" : "#1a1a1a",
+            background: "none",
+            border: "none",
+            cursor: "pointer",
+          }}
         >
           {isOpen ? <X size={22} /> : <Menu size={22} />}
         </button>
       </nav>
 
       {/* Mobile Menu */}
-      <div
-        className={cn(
-          "md:hidden bg-white border-t border-gray-100 overflow-hidden transition-all duration-300",
-          isOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
-        )}
-      >
-        <ul className="container-custom flex flex-col py-4 gap-1">
-          {navLinks.map((link) => (
-            <li key={link.href}>
+      {isOpen && (
+        <div
+          style={{
+            backgroundColor: "white",
+            borderTop: "1px solid #f0ebe3",
+          }}
+        >
+          <ul
+            className="container-custom"
+            style={{
+              listStyle: "none",
+              padding: "1rem 1.5rem",
+              display: "flex",
+              flexDirection: "column",
+              gap: "0",
+            }}
+          >
+            {navLinks.map((link) => (
+              <li key={link.href}>
+                <Link
+                  href={link.href}
+                  style={{
+                    display: "block",
+                    padding: "0.875rem 0",
+                    fontSize: "0.85rem",
+                    letterSpacing: "0.1em",
+                    textTransform: "uppercase",
+                    color: pathname === link.href ? "#722F37" : "#4b5563",
+                    borderBottom: "1px solid #f9f6f3",
+                  }}
+                >
+                  {link.label}
+                </Link>
+              </li>
+            ))}
+            <li style={{ paddingTop: "1rem" }}>
               <Link
-                href={link.href}
-                className={cn(
-                  "block py-3 text-sm tracking-wide border-b border-gray-50 transition-colors hover:text-wine-DEFAULT",
-                  pathname === link.href
-                    ? "text-wine-DEFAULT font-medium"
-                    : "text-gray-600"
-                )}
+                href="/academy/apply"
+                className="btn-primary"
+                style={{ width: "100%", textAlign: "center" }}
               >
-                {link.label}
+                Apply Now
               </Link>
             </li>
-          ))}
-          <li className="pt-3">
-            <Link
-              href="/academy/apply"
-              className="block text-center text-sm font-medium bg-wine-DEFAULT text-white px-5 py-3 hover:bg-wine-dark transition-colors tracking-wide"
-            >
-              Apply Now
-            </Link>
-          </li>
-        </ul>
-      </div>
+          </ul>
+        </div>
+      )}
     </header>
   );
 }

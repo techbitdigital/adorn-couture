@@ -1,17 +1,13 @@
 @import "tailwindcss";
 
-@theme {
-  --font-inter: "Inter", sans-serif;
-  --font-playfair: "Playfair Display", serif;
-}
-
 @layer base {
   :root {
-    --background: #FAF7F4;
-    --foreground: #1a1a1a;
-    --burgundy:   #722F37;
-    --wine:       #5A2129;
-    --cream:      #FAF7F4;
+    --burgundy: #722F37;
+    --burgundy-dark: #5A2129;
+    --burgundy-light: #8B3A44;
+    --cream: #FAF7F4;
+    --cream-dark: #F0EBE3;
+    --gold: #C9A84C;
   }
 
   * {
@@ -23,40 +19,27 @@
   html {
     scroll-behavior: smooth;
     -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
   }
 
   body {
-    background-color: var(--background);
-    color: var(--foreground);
+    background-color: #FAF7F4;
+    color: #1a1a1a;
     font-family: var(--font-inter), sans-serif;
   }
 
   h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-playfair), Georgia, serif;
-    font-weight: 600;
-    line-height: 1.2;
+    line-height: 1.15;
   }
 
-  img {
-    max-width: 100%;
-    height: auto;
-  }
-
-  a {
-    color: inherit;
-    text-decoration: none;
-  }
+  a { color: inherit; text-decoration: none; }
+  img { max-width: 100%; height: auto; }
 }
 
 @layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
-
   .container-custom {
     width: 100%;
-    max-width: 88rem;
+    max-width: 1400px;
     margin-left: auto;
     margin-right: auto;
     padding-left: 1.5rem;
@@ -64,15 +47,114 @@
   }
 
   .section-padding {
-    padding-top: 5rem;
-    padding-bottom: 5rem;
+    padding-top: 6rem;
+    padding-bottom: 6rem;
   }
 
-  .gradient-burgundy {
-    background: linear-gradient(135deg, #722F37 0%, #4a0722 100%);
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #722F37;
+    color: white;
+    padding: 0.875rem 2rem;
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    transition: all 0.2s;
+    border: none;
+    cursor: pointer;
   }
 
-  .gradient-overlay {
-    background: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.7) 100%);
+  .btn-primary:hover {
+    background-color: #5A2129;
+  }
+
+  .btn-outline {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #722F37;
+    color: #722F37;
+    padding: 0.875rem 2rem;
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    transition: all 0.2s;
+    background: transparent;
+    cursor: pointer;
+  }
+
+  .btn-outline:hover {
+    background-color: #722F37;
+    color: white;
+  }
+
+  .btn-white {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+    color: #722F37;
+    padding: 0.875rem 2rem;
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    transition: all 0.2s;
+    border: none;
+    cursor: pointer;
+  }
+
+  .btn-white:hover {
+    background-color: #FAF7F4;
+  }
+
+  .btn-whatsapp {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    background-color: #25D366;
+    color: white;
+    padding: 0.875rem 2rem;
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    transition: all 0.2s;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+  }
+
+  .btn-whatsapp:hover {
+    background-color: #20b558;
+  }
+
+  .tag {
+    font-size: 0.65rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: #722F37;
+    font-weight: 500;
+  }
+
+  .section-title {
+    font-family: var(--font-playfair), Georgia, serif;
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    font-weight: 600;
+    color: #1a1a1a;
+    line-height: 1.1;
+  }
+
+  .hero-title {
+    font-family: var(--font-playfair), Georgia, serif;
+    font-size: clamp(3rem, 8vw, 7rem);
+    font-weight: 700;
+    line-height: 1.0;
+    letter-spacing: -0.02em;
   }
 }

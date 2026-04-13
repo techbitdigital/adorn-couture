@@ -1,75 +1,52 @@
 import Link from "next/link";
 import { getFeaturedCourses } from "@/lib/data/courses";
 import { formatPrice } from "@/lib/utils";
-import Badge from "@/components/ui/Badge";
-import Button from "@/components/ui/Button";
-import { Clock, Users, Award } from "lucide-react";
-
-const perks = [
-  { icon: Clock, text: "Flexible scheduling" },
-  { icon: Users, text: "Small class sizes" },
-  { icon: Award, text: "Certificate upon completion" },
-];
 
 export default function AcademyHighlight() {
   const courses = getFeaturedCourses().slice(0, 3);
 
   return (
-    <section className="section-padding bg-burgundy-950 text-white">
+    <section style={{ backgroundColor: "#1a1a1a", paddingTop: "6rem", paddingBottom: "6rem" }}>
       <div className="container-custom">
-        {/* Header */}
-        <div className="max-w-2xl mb-14">
-          <p className="text-xs tracking-[0.3em] uppercase text-burgundy-300 mb-3">
+
+        <div style={{ maxWidth: "600px", marginBottom: "4rem" }}>
+          <p style={{ fontSize: "0.7rem", letterSpacing: "0.35em", textTransform: "uppercase", color: "#C9A84C", fontWeight: 500, marginBottom: "1rem", display: "block" }}>
             Adorn Couture Academy
           </p>
-          <h2 className="font-serif text-display-sm text-white mb-4">
+          <h2 style={{ fontFamily: "var(--font-playfair), Georgia, serif", fontSize: "clamp(2rem, 4vw, 3.5rem)", fontWeight: 700, color: "white", lineHeight: 1.1, marginBottom: "1.5rem" }}>
             Learn the Art of Fashion Design
           </h2>
-          <p className="text-burgundy-200 leading-relaxed">
-            From sketching your first design to running your own label — our
-            academy equips aspiring designers with real-world skills and
-            industry knowledge.
+          <p style={{ fontSize: "1rem", color: "rgba(255,255,255,0.6)", lineHeight: 1.8 }}>
+            From your first sketch to running your own label — we equip aspiring designers with real-world skills and industry knowledge.
           </p>
-
-          {/* Perks */}
-          <div className="flex flex-wrap gap-6 mt-6">
-            {perks.map(({ icon: Icon, text }) => (
-              <div key={text} className="flex items-center gap-2 text-sm text-burgundy-200">
-                <Icon size={15} className="text-burgundy-400 shrink-0" />
-                {text}
-              </div>
-            ))}
-          </div>
         </div>
 
-        {/* Courses Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "1.5rem", marginBottom: "3rem" }}>
           {courses.map((course) => (
             <Link
               key={course.id}
               href={`/academy/courses/${course.slug}`}
-              className="group block bg-burgundy-900 hover:bg-burgundy-800 transition-colors duration-300 p-6"
+              style={{ display: "block", textDecoration: "none", backgroundColor: "#2a2a2a", padding: "2rem" }}
             >
-              <div className="flex items-start justify-between mb-4">
-                <Badge variant="outline" className="border-burgundy-600 text-burgundy-300">
+              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "1.5rem" }}>
+                <span style={{ fontSize: "0.6rem", letterSpacing: "0.2em", textTransform: "uppercase", fontWeight: 600, color: "#C9A84C", border: "1px solid #C9A84C", padding: "0.25rem 0.75rem" }}>
                   {course.level}
-                </Badge>
-                <span className="text-xs text-burgundy-400">{course.duration}</span>
+                </span>
+                <span style={{ fontSize: "0.72rem", color: "rgba(255,255,255,0.4)" }}>
+                  {course.duration}
+                </span>
               </div>
-
-              <h3 className="font-serif text-lg text-white mb-2 group-hover:text-burgundy-200 transition-colors">
+              <h3 style={{ fontFamily: "var(--font-playfair), Georgia, serif", fontSize: "1.2rem", fontWeight: 600, color: "white", marginBottom: "1rem", lineHeight: 1.3 }}>
                 {course.title}
               </h3>
-
-              <p className="text-sm text-burgundy-300 leading-relaxed mb-6 line-clamp-2">
-                {course.description}
+              <p style={{ fontSize: "0.85rem", color: "rgba(255,255,255,0.5)", lineHeight: 1.7, marginBottom: "1.5rem" }}>
+                {course.description.substring(0, 100)}...
               </p>
-
-              <div className="flex items-center justify-between">
-                <span className="font-medium text-white text-sm">
+              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", borderTop: "1px solid rgba(255,255,255,0.1)", paddingTop: "1.25rem" }}>
+                <span style={{ fontWeight: 600, color: "white", fontSize: "0.95rem" }}>
                   {formatPrice(course.price)}
                 </span>
-                <span className="text-xs text-burgundy-400 group-hover:text-white transition-colors">
+                <span style={{ fontSize: "0.72rem", color: "rgba(255,255,255,0.4)", letterSpacing: "0.1em" }}>
                   Learn more →
                 </span>
               </div>
@@ -77,19 +54,18 @@ export default function AcademyHighlight() {
           ))}
         </div>
 
-        {/* CTA */}
-        <div className="flex flex-col sm:flex-row items-center gap-4">
-          <Link href="/academy/apply">
-            <Button size="lg" className="bg-white text-wine-DEFAULT hover:bg-cream-dark min-w-[180px]">
-              Apply Now
-            </Button>
+        <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap" }}>
+          <Link href="/academy/apply" className="btn-white">
+            Apply Now
           </Link>
-          <Link href="/academy/courses">
-            <Button size="lg" variant="outline" className="border-burgundy-600 text-burgundy-200 hover:border-white hover:text-white min-w-[180px]">
-              View All Courses
-            </Button>
+          <Link
+            href="/academy/courses"
+            style={{ fontSize: "0.72rem", letterSpacing: "0.15em", textTransform: "uppercase", fontWeight: 500, color: "rgba(255,255,255,0.6)", display: "flex", alignItems: "center", gap: "0.5rem", borderBottom: "1px solid rgba(255,255,255,0.3)", paddingBottom: "2px" }}
+          >
+            View All Courses →
           </Link>
         </div>
+
       </div>
     </section>
   );
