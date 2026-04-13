@@ -10,8 +10,13 @@ export function generateStaticParams() {
   return products.map((p) => ({ slug: p.slug }));
 }
 
-export default function ProductDetailPage({ params }: { params: { slug: string } }) {
-  const product = getProductBySlug(params.slug);
+type Props = {
+  params: Promise<{ slug: string }>;
+};
+
+export default async function ProductDetailPage({ params }: Props) {
+  const { slug } = await params;
+  const product = getProductBySlug(slug);
   if (!product) notFound();
 
   const whatsappMessage = `Hi! I am interested in ordering the ${product.name} (${formatPrice(product.price)}). Please provide more details.`;
