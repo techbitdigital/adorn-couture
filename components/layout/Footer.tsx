@@ -23,55 +23,85 @@ const socials = [
 
 export default function Footer() {
   return (
-    <footer className="bg-burgundy-950 text-white">
-      <div className="container-custom py-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
-          <div className="lg:col-span-1">
-            <Link href="/" className="flex flex-col leading-none mb-4">
-              <span className="font-serif text-2xl font-bold tracking-wide text-white">ADORN</span>
-              <span className="text-[10px] tracking-[0.3em] text-burgundy-300 uppercase">Couture</span>
-            </Link>
-            <p className="text-sm text-burgundy-200 leading-relaxed mb-6">Elegance redefined. Fashion and education in perfect harmony.</p>
-            <div className="flex items-center gap-3">
+    <footer style={{ backgroundColor: "#1a1a1a", color: "white" }}>
+      <div className="container-custom" style={{ paddingTop: "5rem", paddingBottom: "3rem" }}>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))", gap: "3rem", marginBottom: "4rem" }}>
+
+          {/* Brand */}
+          <div>
+            <div style={{ marginBottom: "1.5rem" }}>
+              <img src="/tolani-logo.png" alt="Adorn Couture" style={{ height: "60px", width: "auto", filter: "brightness(0) invert(1)" }} />
+            </div>
+            <p style={{ fontSize: "0.85rem", color: "rgba(255,255,255,0.5)", lineHeight: 1.8, marginBottom: "1.5rem" }}>
+              Elegance redefined. Fashion and education in perfect harmony.
+            </p>
+            <div style={{ display: "flex", gap: "0.75rem" }}>
               {socials.map((s) => (
-                <a key={s.label} href={s.href} target="_blank" rel="noopener noreferrer" aria-label={s.label} className="p-2 border border-burgundy-800 hover:border-white hover:text-white text-burgundy-300 transition-colors duration-200">
-                  <Share2 size={16} />
+                <a key={s.label} href={s.href} target="_blank" rel="noopener noreferrer" aria-label={s.label}
+                  style={{ width: "36px", height: "36px", border: "1px solid rgba(255,255,255,0.2)", display: "flex", alignItems: "center", justifyContent: "center", color: "rgba(255,255,255,0.5)", transition: "all 0.2s" }}>
+                  <Share2 size={14} />
                 </a>
               ))}
             </div>
           </div>
+
+          {/* Shop */}
           <div>
-            <h3 className="text-xs font-medium tracking-[0.2em] uppercase text-burgundy-300 mb-5">Shop</h3>
-            <ul className="flex flex-col gap-3">
+            <h3 style={{ fontSize: "0.65rem", letterSpacing: "0.25em", textTransform: "uppercase", color: "rgba(255,255,255,0.4)", marginBottom: "1.5rem", fontWeight: 500 }}>Shop</h3>
+            <ul style={{ listStyle: "none", display: "flex", flexDirection: "column", gap: "0.875rem" }}>
               {footerLinks.shop.map((link) => (
                 <li key={link.href}>
-                  <Link href={link.href} className="text-sm text-burgundy-200 hover:text-white transition-colors duration-200">{link.label}</Link>
+                  <Link href={link.href} style={{ fontSize: "0.875rem", color: "rgba(255,255,255,0.6)", transition: "color 0.2s" }}>
+                    {link.label}
+                  </Link>
                 </li>
               ))}
             </ul>
           </div>
+
+          {/* Academy */}
           <div>
-            <h3 className="text-xs font-medium tracking-[0.2em] uppercase text-burgundy-300 mb-5">Academy</h3>
-            <ul className="flex flex-col gap-3">
+            <h3 style={{ fontSize: "0.65rem", letterSpacing: "0.25em", textTransform: "uppercase", color: "rgba(255,255,255,0.4)", marginBottom: "1.5rem", fontWeight: 500 }}>Academy</h3>
+            <ul style={{ listStyle: "none", display: "flex", flexDirection: "column", gap: "0.875rem" }}>
               {footerLinks.academy.map((link) => (
                 <li key={link.href}>
-                  <Link href={link.href} className="text-sm text-burgundy-200 hover:text-white transition-colors duration-200">{link.label}</Link>
+                  <Link href={link.href} style={{ fontSize: "0.875rem", color: "rgba(255,255,255,0.6)", transition: "color 0.2s" }}>
+                    {link.label}
+                  </Link>
                 </li>
               ))}
             </ul>
           </div>
+
+          {/* Contact */}
           <div>
-            <h3 className="text-xs font-medium tracking-[0.2em] uppercase text-burgundy-300 mb-5">Contact</h3>
-            <ul className="flex flex-col gap-4">
-              <li className="flex items-start gap-3 text-sm text-burgundy-200"><MapPin size={15} className="mt-0.5 shrink-0 text-burgundy-400" />Lagos, Nigeria</li>
-              <li className="flex items-center gap-3 text-sm text-burgundy-200"><Phone size={15} className="shrink-0 text-burgundy-400" /><a href="tel:+2348000000000" className="hover:text-white transition-colors">+234 800 000 0000</a></li>
-              <li className="flex items-center gap-3 text-sm text-burgundy-200"><Mail size={15} className="shrink-0 text-burgundy-400" /><a href="mailto:hello@adorncouture.com" className="hover:text-white transition-colors">hello@adorncouture.com</a></li>
+            <h3 style={{ fontSize: "0.65rem", letterSpacing: "0.25em", textTransform: "uppercase", color: "rgba(255,255,255,0.4)", marginBottom: "1.5rem", fontWeight: 500 }}>Contact</h3>
+            <ul style={{ listStyle: "none", display: "flex", flexDirection: "column", gap: "1rem" }}>
+              <li style={{ display: "flex", alignItems: "flex-start", gap: "0.75rem", fontSize: "0.875rem", color: "rgba(255,255,255,0.6)" }}>
+                <MapPin size={14} style={{ marginTop: "3px", flexShrink: 0, color: "#C9A84C" }} />
+                Lagos, Nigeria
+              </li>
+              <li style={{ display: "flex", alignItems: "center", gap: "0.75rem", fontSize: "0.875rem", color: "rgba(255,255,255,0.6)" }}>
+                <Phone size={14} style={{ flexShrink: 0, color: "#C9A84C" }} />
+                <a href="tel:+2348000000000" style={{ color: "rgba(255,255,255,0.6)" }}>+234 800 000 0000</a>
+              </li>
+              <li style={{ display: "flex", alignItems: "center", gap: "0.75rem", fontSize: "0.875rem", color: "rgba(255,255,255,0.6)" }}>
+                <Mail size={14} style={{ flexShrink: 0, color: "#C9A84C" }} />
+                <a href="mailto:hello@adorncouture.com" style={{ color: "rgba(255,255,255,0.6)" }}>hello@adorncouture.com</a>
+              </li>
             </ul>
           </div>
+
         </div>
-        <div className="mt-12 pt-8 border-t border-burgundy-800 flex flex-col md:flex-row items-center justify-between gap-4">
-          <p className="text-xs text-burgundy-400">© {new Date().getFullYear()} Adorn Couture. All rights reserved.</p>
-          <p className="text-xs text-burgundy-400">Crafted with elegance in Lagos, Nigeria</p>
+
+        {/* Bottom */}
+        <div style={{ borderTop: "1px solid rgba(255,255,255,0.1)", paddingTop: "2rem", display: "flex", flexWrap: "wrap", justifyContent: "space-between", alignItems: "center", gap: "1rem" }}>
+          <p style={{ fontSize: "0.75rem", color: "rgba(255,255,255,0.3)" }}>
+            © {new Date().getFullYear()} Adorn Couture. All rights reserved.
+          </p>
+          <p style={{ fontSize: "0.75rem", color: "rgba(255,255,255,0.3)" }}>
+            Crafted with elegance in Lagos, Nigeria
+          </p>
         </div>
       </div>
     </footer>

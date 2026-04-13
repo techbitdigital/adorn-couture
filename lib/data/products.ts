@@ -9,10 +9,10 @@ export const products: Product[] = [
     category: "Evening Wear",
     description:
       "A breathtaking floor-length gown crafted from premium silk charmeuse. Features a dramatic open back, hand-sewn beading at the bodice, and a sweeping train. Perfect for galas, weddings, and black-tie events.",
-    images: [
-      "https://images.unsplash.com/photo-1566479179817-0b9f8e6b8e2b?w=800&q=80",
-      "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=800&q=80",
-    ],
+   images: [
+  "https://images.unsplash.com/photo-1539008835657-9e8e9680c956?w=800&q=80",
+  "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=800&q=80",
+],
     sizes: ["XS", "S", "M", "L", "XL"],
     colors: ["Crimson", "Midnight Black", "Ivory"],
     featured: true,
@@ -27,9 +27,9 @@ export const products: Product[] = [
     description:
       "An exquisite bridal ensemble featuring intricate lace overlay, cathedral-length veil, and a structured bodice with hand-embroidered floral details. Every stitch tells a story of timeless elegance.",
     images: [
-      "https://images.unsplash.com/photo-1594552072238-b8a33785b6cd?w=800&q=80",
-      "https://images.unsplash.com/photo-1519741497674-611481863552?w=800&q=80",
-    ],
+  "https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?w=800&q=80",
+  "https://images.unsplash.com/photo-1519741497674-611481863552?w=800&q=80",
+],
     sizes: ["XS", "S", "M", "L"],
     colors: ["Ivory", "Pearl White"],
     featured: true,
