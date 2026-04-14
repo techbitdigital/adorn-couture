@@ -3,75 +3,80 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { products, getProductBySlug } from "@/lib/data/products";
 import { formatPrice, generateWhatsAppLink } from "@/lib/utils";
-import Badge from "@/components/ui/Badge";
-import Button from "@/components/ui/Button";
 
 export function generateStaticParams() {
   return products.map((p) => ({ slug: p.slug }));
 }
 
-type Props = {
-  params: Promise<{ slug: string }>;
-};
+type Props = { params: Promise<{ slug: string }> };
 
 export default async function ProductDetailPage({ params }: Props) {
   const { slug } = await params;
   const product = getProductBySlug(slug);
   if (!product) notFound();
 
-  const whatsappMessage = `Hi! I am interested in ordering the ${product.name} (${formatPrice(product.price)}). Please provide more details.`;
-  const whatsappLink = generateWhatsAppLink("+2348000000000", whatsappMessage);
+  const msg = ["Hi I am interested in ordering the ", product.name, " (", formatPrice(product.price), "). Please provide more details."].join("");
+  const whatsappLink = generateWhatsAppLink("+2348000000000", msg);
 
   return (
-    <div className="min-h-screen bg-white pt-20">
-      <div className="container-custom section-padding">
-        <div className="flex items-center gap-2 text-xs text-gray-400 mb-10 tracking-wide">
-          <Link href="/" className="hover:text-wine-DEFAULT transition-colors">Home</Link>
-          <span>/</span>
-          <Link href="/shop" className="hover:text-wine-DEFAULT transition-colors">Shop</Link>
-          <span>/</span>
-          <span className="text-gray-600">{product.name}</span>
+    <div style={{ minHeight: "100vh", backgroundColor: "white" }}>
+      <style>{".sz{border:1px solid #e5e7eb;padding:0.5rem 1rem;font-size:0.8rem;cursor:pointer;transition:all 0.2s;background:white;font-family:inherit} .sz:hover{border-color:#722F37;color:#722F37} .pdg{display:grid;grid-template-columns:1fr;gap:4rem} @media(min-width:1024px){.pdg{grid-template-columns:1fr 1fr}}"}</style>
+      <div style={{ paddingTop: "6rem", paddingBottom: "1.5rem", borderBottom: "1px solid #f0ebe3", backgroundColor: "#FAF7F4" }}>
+        <div className="container-custom">
+          <div style={{ display: "flex", alignItems: "center", gap: "0.75rem" }}>
+            <Link href="/" style={{ fontSize: "0.72rem", color: "#9ca3af", letterSpacing: "0.1em", textTransform: "uppercase" }}>Home</Link>
+            <span style={{ color: "#d1d5db" }}>/</span>
+            <Link href="/shop" style={{ fontSize: "0.72rem", color: "#9ca3af", letterSpacing: "0.1em", textTransform: "uppercase" }}>Shop</Link>
+            <span style={{ color: "#d1d5db" }}>/</span>
+            <span style={{ fontSize: "0.72rem", color: "#722F37", letterSpacing: "0.1em", textTransform: "uppercase" }}>{product.name}</span>
+          </div>
         </div>
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
-          <div className="space-y-4">
-            <div className="relative aspect-[3/4] overflow-hidden bg-cream-dark">
-              <Image src={product.images[0]} alt={product.name} fill className="object-cover" sizes="(max-width: 1024px) 100vw, 50vw" priority />
+      </div>
+      <div className="container-custom" style={{ paddingTop: "4rem", paddingBottom: "6rem" }}>
+        <div className="pdg">
+          <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
+            <div style={{ position: "relative", aspectRatio: "3/4", overflow: "hidden", backgroundColor: "#F0EBE3" }}>
+              <Image src={product.images[0]} alt={product.name} fill style={{ objectFit: "cover" }} sizes="(max-width:1024px) 100vw,50vw" priority />
             </div>
           </div>
-          <div className="lg:sticky lg:top-24 lg:self-start">
-            <Badge variant="burgundy" className="mb-4">{product.category}</Badge>
-            <h1 className="font-serif text-display-sm text-gray-900 mb-2">{product.name}</h1>
-            <p className="text-2xl font-medium text-wine-DEFAULT mb-6">{formatPrice(product.price)}</p>
-            <p className="text-gray-600 leading-relaxed mb-8">{product.description}</p>
-            <div className="mb-6">
-              <p className="text-xs font-medium tracking-[0.2em] uppercase text-gray-700 mb-3">Available Sizes</p>
-              <div className="flex flex-wrap gap-2">
-                {product.sizes.map((size) => (
-                  <span key={size} className="border border-gray-200 px-4 py-2 text-sm text-gray-700 hover:border-wine-DEFAULT hover:text-wine-DEFAULT transition-colors cursor-pointer">{size}</span>
-                ))}
+          <div style={{ position: "sticky", top: "6rem", alignSelf: "flex-start" }}>
+            <p className="tag" style={{ marginBottom: "1rem", display: "block" }}>{product.category}</p>
+            <h1 style={{ fontFamily: "var(--font-playfair), Georgia, serif", fontSize: "clamp(2rem, 4vw, 3rem)", fontWeight: 700, color: "#1a1a1a", lineHeight: 1.1, marginBottom: "1rem" }}>{product.name}</h1>
+            <p style={{ fontSize: "1.75rem", fontWeight: 700, color: "#722F37", marginBottom: "1.5rem" }}>{formatPrice(product.price)}</p>
+            <div style={{ height: "1px", backgroundColor: "#f0ebe3", marginBottom: "1.5rem" }} />
+            <p style={{ fontSize: "0.95rem", color: "#6b7280", lineHeight: 1.9, marginBottom: "2rem" }}>{product.description}</p>
+            <div style={{ marginBottom: "1.5rem" }}>
+              <p style={{ fontSize: "0.7rem", letterSpacing: "0.2em", textTransform: "uppercase", fontWeight: 600, color: "#1a1a1a", marginBottom: "0.875rem" }}>Available Sizes</p>
+              <div style={{ display: "flex", flexWrap: "wrap", gap: "0.5rem" }}>
+                {product.sizes.map((size) => (<button key={size} className="sz">{size}</button>))}
               </div>
             </div>
-            <div className="mb-10">
-              <p className="text-xs font-medium tracking-[0.2em] uppercase text-gray-700 mb-3">Colors</p>
-              <div className="flex flex-wrap gap-2">
-                {product.colors.map((color) => (
-                  <span key={color} className="border border-gray-200 px-4 py-2 text-sm text-gray-700">{color}</span>
-                ))}
+            <div style={{ marginBottom: "2.5rem" }}>
+              <p style={{ fontSize: "0.7rem", letterSpacing: "0.2em", textTransform: "uppercase", fontWeight: 600, color: "#1a1a1a", marginBottom: "0.875rem" }}>Colors</p>
+              <div style={{ display: "flex", flexWrap: "wrap", gap: "0.5rem" }}>
+                {product.colors.map((color) => (<button key={color} className="sz">{color}</button>))}
               </div>
             </div>
-            <a href={whatsappLink} target="_blank" rel="noopener noreferrer">
-              <Button variant="whatsapp" size="lg" fullWidth className="mb-4">Order via WhatsApp</Button>
+            <a href={whatsappLink} target="_blank" rel="noopener noreferrer" style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "0.75rem", backgroundColor: "#25D366", color: "white", padding: "1rem 2rem", fontSize: "0.8rem", fontWeight: 600, letterSpacing: "0.15em", textTransform: "uppercase", textDecoration: "none", marginBottom: "1rem", width: "100%" }}>
+              Order via WhatsApp
             </a>
-            <p className="text-xs text-gray-400 text-center">You will be redirected to WhatsApp to complete your order</p>
-            <div className="border-t border-gray-100 mt-10 pt-8">
-              <div className="flex flex-col gap-3 text-sm text-gray-500">
-                <p>Custom sizing available on request</p>
-                <p>Delivery within Lagos: 2-3 business days</p>
-                <p>Nationwide delivery available</p>
-              </div>
+            <p style={{ fontSize: "0.75rem", color: "#9ca3af", textAlign: "center", marginBottom: "2rem" }}>You will be redirected to WhatsApp to complete your order</p>
+            <div style={{ height: "1px", backgroundColor: "#f0ebe3", marginBottom: "1.5rem" }} />
+            <div style={{ display: "flex", flexDirection: "column", gap: "0.75rem" }}>
+              {["Custom sizing available on request", "Delivery within Lagos: 2-3 business days", "Nationwide delivery available"].map((item) => (
+                <div key={item} style={{ display: "flex", alignItems: "center", gap: "0.75rem" }}>
+                  <div style={{ width: "4px", height: "4px", borderRadius: "50%", backgroundColor: "#C9A84C", flexShrink: 0 }} />
+                  <p style={{ fontSize: "0.85rem", color: "#6b7280" }}>{item}</p>
+                </div>
+              ))}
             </div>
           </div>
         </div>
+      </div>
+      <div style={{ backgroundColor: "#FAF7F4", borderTop: "1px solid #f0ebe3", paddingTop: "4rem", paddingBottom: "4rem", textAlign: "center" }}>
+        <p className="tag" style={{ marginBottom: "1rem", display: "block" }}>Continue Shopping</p>
+        <h2 style={{ fontFamily: "var(--font-playfair), Georgia, serif", fontSize: "clamp(1.5rem, 3vw, 2rem)", fontWeight: 700, color: "#1a1a1a", marginBottom: "1.5rem" }}>Explore More Pieces</h2>
+        <Link href="/shop" style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", backgroundColor: "#722F37", color: "white", padding: "0.875rem 2.5rem", fontSize: "0.8rem", fontWeight: 500, letterSpacing: "0.15em", textTransform: "uppercase", textDecoration: "none" }}>View All Collection</Link>
       </div>
     </div>
   );
