@@ -44,6 +44,9 @@ export default function Navbar() {
         }
         .mobile-menu { display: none; }
         .mobile-menu.open { display: block; }
+        @media(max-width: 767px) {
+        .nav-logo { height: 45px !important; }
+        }
       `}</style>
 
       <header style={{
@@ -68,8 +71,9 @@ export default function Navbar() {
             <img
               src="/tolani-logo.png"
               alt="Adorn Couture"
+              className="nav-logo"
               style={{
-                height: isTransparent ? "80px" : "65px",
+                height: isTransparent ? "70px" : "55px",
                 width: "auto",
                 objectFit: "contain",
                 transition: "all 0.3s",
