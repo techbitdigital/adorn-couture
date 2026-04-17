@@ -12,6 +12,23 @@ export default function HeroSection() {
         backgroundColor: "#1a1a1a",
       }}
     >
+      <style>{`
+        .hero-stats {
+          display: none;
+        }
+        @media(min-width: 768px) {
+          .hero-stats {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            align-items: flex-end;
+            position: absolute;
+            bottom: 3rem;
+            right: 1.5rem;
+          }
+        }
+      `}</style>
+
       {/* Video Background */}
       <video
         autoPlay
@@ -35,27 +52,37 @@ export default function HeroSection() {
         style={{
           position: "absolute",
           inset: 0,
-          background: "linear-gradient(to right, rgba(0,0,0,0.80) 0%, rgba(0,0,0,0.4) 60%, transparent 100%)",
+          background: "linear-gradient(to right, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.4) 60%, transparent 100%)",
         }}
       />
 
       {/* Content */}
       <div
         className="container-custom"
-        style={{ position: "relative", zIndex: 10, paddingTop: "8rem", paddingBottom: "6rem" }}
+        style={{ position: "relative", zIndex: 10, paddingTop: "8rem", paddingBottom: "8rem" }}
       >
-        <div style={{ maxWidth: "700px" }}>
+        <div style={{ maxWidth: "650px" }}>
 
           {/* Eyebrow */}
-          <div style={{ display: "flex", alignItems: "center", gap: "1rem", marginBottom: "1.5rem" }}>
-            <div style={{ width: "40px", height: "1px", backgroundColor: "#C9A84C" }} />
+          <div style={{ display: "flex", alignItems: "center", gap: "1rem", marginBottom: "1.5rem", flexWrap: "wrap" }}>
+            <div style={{ width: "40px", height: "1px", backgroundColor: "#C9A84C", flexShrink: 0 }} />
             <span style={{ fontSize: "0.7rem", letterSpacing: "0.35em", textTransform: "uppercase", color: "#C9A84C", fontWeight: 500 }}>
-              Lagos, Ibadan Nigeria · Est. 2020
+              Lagos, Nigeria · Est. 2020
             </span>
           </div>
 
           {/* Headline */}
-          <h1 className="hero-title" style={{ color: "white", marginBottom: "1.5rem" }}>
+          <h1
+            style={{
+              fontFamily: "var(--font-playfair), Georgia, serif",
+              fontSize: "clamp(3rem, 8vw, 7rem)",
+              fontWeight: 700,
+              lineHeight: 1.0,
+              letterSpacing: "-0.02em",
+              color: "white",
+              marginBottom: "1.5rem",
+            }}
+          >
             Where
             <br />
             <span style={{ color: "#C9A84C", fontStyle: "italic" }}>Fashion</span>
@@ -76,7 +103,22 @@ export default function HeroSection() {
 
           {/* CTAs */}
           <div style={{ display: "flex", flexWrap: "wrap", gap: "1rem", alignItems: "center" }}>
-            <Link href="/shop" className="btn-white">
+            <Link
+              href="/shop"
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                justifyContent: "center",
+                backgroundColor: "white",
+                color: "#722F37",
+                padding: "0.875rem 2rem",
+                fontSize: "0.78rem",
+                fontWeight: 600,
+                letterSpacing: "0.15em",
+                textTransform: "uppercase",
+                textDecoration: "none",
+              }}
+            >
               Shop Collection
             </Link>
             <Link
@@ -92,6 +134,7 @@ export default function HeroSection() {
                 gap: "0.5rem",
                 borderBottom: "1px solid rgba(255,255,255,0.4)",
                 paddingBottom: "2px",
+                textDecoration: "none",
               }}
             >
               Explore Academy →
@@ -99,23 +142,14 @@ export default function HeroSection() {
           </div>
         </div>
 
-        {/* Bottom Stats */}
-        <div
-          style={{
-            position: "absolute",
-            bottom: "3rem",
-            right: "1.5rem",
-            display: "flex",
-            gap: "3rem",
-          }}
-          className="hidden md:flex"
-        >
+        {/* Stats - Desktop Only */}
+        <div className="hero-stats">
           {[
             { value: "500+", label: "Happy Clients" },
             { value: "200+", label: "Designs" },
             { value: "150+", label: "Graduates" },
           ].map((stat) => (
-            <div key={stat.label} style={{ textAlign: "center" }}>
+            <div key={stat.label} style={{ textAlign: "right" }}>
               <p style={{ fontFamily: "var(--font-playfair), Georgia, serif", fontSize: "1.75rem", fontWeight: 700, color: "white", lineHeight: 1 }}>
                 {stat.value}
               </p>
@@ -125,23 +159,23 @@ export default function HeroSection() {
             </div>
           ))}
         </div>
-      </div>
 
-      {/* Scroll Indicator */}
-      <div
-        style={{
-          position: "absolute",
-          bottom: "2rem",
-          left: "50%",
-          transform: "translateX(-50%)",
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          gap: "0.5rem",
-        }}
-      >
-        <span style={{ fontSize: "0.6rem", letterSpacing: "0.3em", textTransform: "uppercase", color: "rgba(255,255,255,0.4)" }}>Scroll</span>
-        <div style={{ width: "1px", height: "40px", backgroundColor: "rgba(255,255,255,0.3)" }} />
+        {/* Scroll Indicator */}
+        <div
+          style={{
+            position: "absolute",
+            bottom: "2rem",
+            left: "50%",
+            transform: "translateX(-50%)",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            gap: "0.5rem",
+          }}
+        >
+          <span style={{ fontSize: "0.6rem", letterSpacing: "0.3em", textTransform: "uppercase", color: "rgba(255,255,255,0.4)" }}>Scroll</span>
+          <div style={{ width: "1px", height: "40px", backgroundColor: "rgba(255,255,255,0.3)" }} />
+        </div>
       </div>
     </section>
   );
