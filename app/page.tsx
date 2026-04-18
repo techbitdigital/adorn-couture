@@ -15,6 +15,7 @@ export default function HomePage() {
       <AcademyHighlight />
       <Testimonials />
       
+      
       {/* Contact CTA Banner */}
      {/* Contact CTA Banner */}
       <section style={{ padding: "5rem 0", backgroundColor: "#FAF7F4", borderTop: "1px solid #f0ebe3" }}>
