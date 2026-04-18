@@ -1,6 +1,25 @@
+"use client";
+
 import Link from "next/link";
+import { useEffect, useState } from "react";
+
+const rotatingWords = ["Artistry", "Elegance", "Culture", "Identity"];
 
 export default function HeroSection() {
+  const [currentWord, setCurrentWord] = useState(0);
+  const [animating, setAnimating] = useState(false);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setAnimating(true);
+      setTimeout(() => {
+        setCurrentWord((prev) => (prev + 1) % rotatingWords.length);
+        setAnimating(false);
+      }, 500);
+    }, 2500);
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <section
       style={{
@@ -25,6 +44,52 @@ export default function HeroSection() {
             position: absolute;
             bottom: 3rem;
             right: 1.5rem;
+          }
+        }
+
+        .word-mask {
+          display: inline-block;
+          overflow: hidden;
+          vertical-align: bottom;
+          width: 100%;
+          height: 1.15em;
+          position: relative;
+}
+
+        .word-inner {
+          display: inline-block;
+          color: #C9A84C;
+          font-style: italic;
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          white-space: nowrap;
+          animation: revealUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        .word-inner.exit {
+          animation: hideDown 0.4s cubic-bezier(0.7, 0, 0.84, 0) forwards;
+        }
+
+        @keyframes revealUp {
+          0% {
+            transform: translateY(100%);
+            opacity: 0;
+          }
+          100% {
+            transform: translateY(0%);
+            opacity: 1;
+          }
+        }
+
+        @keyframes hideDown {
+          0% {
+            transform: translateY(0%);
+            opacity: 1;
+          }
+          100% {
+            transform: translateY(-100%);
+            opacity: 0;
           }
         }
       `}</style>
@@ -61,7 +126,7 @@ export default function HeroSection() {
         className="container-custom"
         style={{ position: "relative", zIndex: 10, paddingTop: "8rem", paddingBottom: "8rem" }}
       >
-        <div style={{ maxWidth: "650px" }}>
+        <div style={{ maxWidth: "700px" }}>
 
           {/* Eyebrow */}
           <div style={{ display: "flex", alignItems: "center", gap: "1rem", marginBottom: "1.5rem", flexWrap: "wrap" }}>
@@ -77,7 +142,7 @@ export default function HeroSection() {
               fontFamily: "var(--font-playfair), Georgia, serif",
               fontSize: "clamp(3rem, 8vw, 7rem)",
               fontWeight: 700,
-              lineHeight: 1.0,
+              lineHeight: 1.05,
               letterSpacing: "-0.02em",
               color: "white",
               marginBottom: "1.5rem",
@@ -85,9 +150,17 @@ export default function HeroSection() {
           >
             Where
             <br />
-            <span style={{ color: "#C9A84C", fontStyle: "italic" }}>Fashion</span>
+            Fashion
             <br />
-            Meets Art
+            Meets{" "}
+            <span className="word-mask">
+              <span
+                key={currentWord}
+                className={`word-inner ${animating ? "exit" : ""}`}
+              >
+                {rotatingWords[currentWord]}
+              </span>
+            </span>
           </h1>
 
           {/* Subheadline */}
