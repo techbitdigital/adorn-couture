@@ -9,10 +9,10 @@ export const products: Product[] = [
     category: "Evening Wear",
     description:
       "A breathtaking floor-length gown crafted from premium silk charmeuse. Features a dramatic open back, hand-sewn beading at the bodice, and a sweeping train. Perfect for galas, weddings, and black-tie events.",
-   images: [
-  "https://images.unsplash.com/photo-1539008835657-9e8e9680c956?w=800&q=80",
-  "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=800&q=80",
-],
+    images: [
+      "/product-1.png",
+      "/product-1.png",
+    ],
     sizes: ["XS", "S", "M", "L", "XL"],
     colors: ["Crimson", "Midnight Black", "Ivory"],
     featured: true,
@@ -27,9 +27,9 @@ export const products: Product[] = [
     description:
       "An exquisite bridal ensemble featuring intricate lace overlay, cathedral-length veil, and a structured bodice with hand-embroidered floral details. Every stitch tells a story of timeless elegance.",
     images: [
-  "https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?w=800&q=80",
-  "https://images.unsplash.com/photo-1519741497674-611481863552?w=800&q=80",
-],
+      "/product-4.jpg",
+      "/product-4.jpg",
+    ],
     sizes: ["XS", "S", "M", "L"],
     colors: ["Ivory", "Pearl White"],
     featured: true,
@@ -44,8 +44,8 @@ export const products: Product[] = [
     description:
       "A versatile wrap dress in deep wine crepe fabric. Flattering silhouette with adjustable waist tie, flutter sleeves, and midi length. Effortlessly transitions from day to evening.",
     images: [
-      "https://images.unsplash.com/photo-1496747611176-843222e1e57c?w=800&q=80",
-      "https://images.unsplash.com/photo-1502716119720-b23a93e5fe1b?w=800&q=80",
+      "/product-3.png",
+      "/product-3.png",
     ],
     sizes: ["XS", "S", "M", "L", "XL", "2XL"],
     colors: ["Wine", "Forest Green", "Navy"],
@@ -61,8 +61,8 @@ export const products: Product[] = [
     description:
       "A sharp, tailored blazer with clean lines and a modern cut. Premium wool-blend fabric with satin lapels. The ultimate power piece for the confident professional woman.",
     images: [
-      "https://images.unsplash.com/photo-1487222477894-8943e31ef7b2?w=800&q=80",
-      "https://images.unsplash.com/photo-1485968579580-b6d095142e6e?w=800&q=80",
+      "/tolanibrandpix.png",
+      "/tolanibrandpix.png",
     ],
     sizes: ["XS", "S", "M", "L", "XL"],
     colors: ["Charcoal", "Ivory", "Burgundy"],
@@ -78,8 +78,8 @@ export const products: Product[] = [
     description:
       "A stunning two-piece co-ord set fusing vibrant Ankara print with contemporary tailoring. Features a cropped jacket and wide-leg trousers. Celebrating African heritage with modern flair.",
     images: [
-      "https://images.unsplash.com/photo-1509631179647-0177331693ae?w=800&q=80",
-      "https://images.unsplash.com/photo-1525507119028-ed4c629a60a3?w=800&q=80",
+      "/tolanibrandpix.png",
+      "/tolanibrandpix.png",
     ],
     sizes: ["S", "M", "L", "XL", "2XL"],
     colors: ["Multi-print"],
@@ -95,8 +95,8 @@ export const products: Product[] = [
     description:
       "A sleek knee-length cocktail dress in matte black crepe. Features an asymmetric neckline, ruched waist detail, and a subtle thigh-high slit. The perfect little black dress, elevated.",
     images: [
-      "https://images.unsplash.com/photo-1521577352947-9bb58764b69a?w=800&q=80",
-      "https://images.unsplash.com/photo-1539109136881-3be0616acf4b?w=800&q=80",
+      "/tolanibrandpix.png",
+      "/tolanibrandpix.png",
     ],
     sizes: ["XS", "S", "M", "L", "XL"],
     colors: ["Noir Black"],
