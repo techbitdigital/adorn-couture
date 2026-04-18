@@ -1,3 +1,4 @@
+import Testimonials from "@/components/sections/Testimonials";
 import HeroSection from "@/components/sections/HeroSection";
 import FeaturedCollection from "@/components/sections/FeaturedCollection";
 import StatsSection from "@/components/sections/StatsSection";
@@ -12,7 +13,8 @@ export default function HomePage() {
       <StatsSection />
       <FeaturedCollection />
       <AcademyHighlight />
-
+      <Testimonials />
+      
       {/* Contact CTA Banner */}
      {/* Contact CTA Banner */}
       <section style={{ padding: "5rem 0", backgroundColor: "#FAF7F4", borderTop: "1px solid #f0ebe3" }}>
