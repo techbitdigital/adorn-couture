@@ -1,8 +1,11 @@
 "use client";
 import { useState } from "react";
 import { Phone, Mail, MapPin, MessageCircle, Clock } from "lucide-react";
+import SuccessModal from "@/components/ui/SuccessModal";
 
 export default function ContactPage() {
+  const [showModal, setShowModal] = useState(false);
+  const [submittedName, setSubmittedName] = useState("");
   const [status, setStatus] = useState("idle");
   const [form, setForm] = useState({ name: "", email: "", phone: "", subject: "", message: "" });
 
@@ -20,10 +23,16 @@ export default function ContactPage() {
         body: JSON.stringify(form),
       });
       if (res.ok) {
-        setStatus("success");
+        setSubmittedName(form.name.split(" ")[0]);
         setForm({ name: "", email: "", phone: "", subject: "", message: "" });
-      } else { setStatus("error"); }
-    } catch { setStatus("error"); }
+        setStatus("idle");
+        setShowModal(true);
+      } else {
+        setStatus("error");
+      }
+    } catch {
+      setStatus("error");
+    }
   };
 
   const inputStyle: React.CSSProperties = {
@@ -56,70 +65,66 @@ export default function ContactPage() {
   ];
 
   return (
-    <div style={{ minHeight: "100vh", backgroundColor: "white" }}>
-      <style>{`
-        .cform-grid { display: grid; grid-template-columns: 1fr; gap: 4rem; }
-        @media(min-width: 1024px) { .cform-grid { grid-template-columns: 2fr 3fr; } }
-        .cinput-row { display: grid; grid-template-columns: 1fr; gap: 1.5rem; }
-        @media(min-width: 640px) { .cinput-row { grid-template-columns: 1fr 1fr; } }
-      `}</style>
+    <>
+      <SuccessModal
+        isOpen={showModal}
+        onClose={() => setShowModal(false)}
+        type="contact"
+        name={submittedName}
+      />
 
-      {/* Header */}
-      <div style={{ paddingTop: "8rem", paddingBottom: "4rem", backgroundColor: "#FAF7F4", borderBottom: "1px solid #f0ebe3" }}>
-        <div className="container-custom">
-          <p style={{ fontSize: "0.7rem", letterSpacing: "0.35em", textTransform: "uppercase", color: "#722F37", fontWeight: 500, marginBottom: "1rem", display: "block" }}>Get In Touch</p>
-          <h1 style={{ fontFamily: "var(--font-playfair), Georgia, serif", fontSize: "clamp(2.5rem, 5vw, 4rem)", fontWeight: 700, color: "#1a1a1a", marginBottom: "1rem", lineHeight: 1.1 }}>Contact Us</h1>
-          <p style={{ fontSize: "1rem", color: "#6b7280", maxWidth: "500px", lineHeight: 1.8 }}>We would love to hear from you. Reach out for orders, academy inquiries, or any questions.</p>
-        </div>
-      </div>
+      <div style={{ minHeight: "100vh", backgroundColor: "white" }}>
+        <style>{`
+          .cform-grid { display: grid; grid-template-columns: 1fr; gap: 4rem; }
+          @media(min-width: 1024px) { .cform-grid { grid-template-columns: 2fr 3fr; } }
+          .cinput-row { display: grid; grid-template-columns: 1fr; gap: 1.5rem; }
+          @media(min-width: 640px) { .cinput-row { grid-template-columns: 1fr 1fr; } }
+        `}</style>
 
-      {/* Main */}
-      <div className="container-custom" style={{ paddingTop: "5rem", paddingBottom: "6rem" }}>
-        <div className="cform-grid">
-
-          {/* Contact Info */}
-          <div>
-            <h2 style={{ fontFamily: "var(--font-playfair), Georgia, serif", fontSize: "1.5rem", fontWeight: 700, color: "#1a1a1a", marginBottom: "2.5rem" }}>Reach Us Directly</h2>
-            <div style={{ display: "flex", flexDirection: "column", gap: "2rem", marginBottom: "3rem" }}>
-              {contactInfo.map((item) => {
-                const Icon = item.icon;
-                return (
-                  <div key={item.label} style={{ display: "flex", alignItems: "flex-start", gap: "1.25rem" }}>
-                    <div style={{ width: "44px", height: "44px", backgroundColor: "#FAF7F4", border: "1px solid #f0ebe3", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
-                      <Icon size={16} style={{ color: "#722F37" }} />
-                    </div>
-                    <div>
-                      <p style={{ fontSize: "0.65rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "#9ca3af", marginBottom: "0.25rem", fontWeight: 500 }}>{item.label}</p>
-                      <p style={{ fontSize: "0.95rem", color: "#1a1a1a", fontWeight: 500 }}>{item.value}</p>
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
-            <div style={{ borderTop: "1px solid #f0ebe3", paddingTop: "2rem" }}>
-              <p style={{ fontSize: "0.85rem", color: "#6b7280", marginBottom: "1.25rem", lineHeight: 1.7 }}>Prefer to chat directly? Reach us on WhatsApp for faster responses.</p>
-              <a href="https://wa.me/2348000000000" target="_blank" rel="noopener noreferrer"
-                style={{ display: "inline-flex", alignItems: "center", gap: "0.75rem", backgroundColor: "#25D366", color: "white", padding: "0.875rem 1.75rem", fontSize: "0.8rem", fontWeight: 600, letterSpacing: "0.15em", textTransform: "uppercase", textDecoration: "none" }}>
-                <MessageCircle size={16} />
-                Chat on WhatsApp
-              </a>
-            </div>
+        {/* Header */}
+        <div style={{ paddingTop: "8rem", paddingBottom: "4rem", backgroundColor: "#FAF7F4", borderBottom: "1px solid #f0ebe3" }}>
+          <div className="container-custom">
+            <p style={{ fontSize: "0.7rem", letterSpacing: "0.35em", textTransform: "uppercase", color: "#722F37", fontWeight: 500, marginBottom: "1rem", display: "block" }}>Get In Touch</p>
+            <h1 style={{ fontFamily: "var(--font-playfair), Georgia, serif", fontSize: "clamp(2.5rem, 5vw, 4rem)", fontWeight: 700, color: "#1a1a1a", marginBottom: "1rem", lineHeight: 1.1 }}>Contact Us</h1>
+            <p style={{ fontSize: "1rem", color: "#6b7280", maxWidth: "500px", lineHeight: 1.8 }}>We would love to hear from you. Reach out for orders, academy inquiries, or any questions.</p>
           </div>
+        </div>
 
-          {/* Form */}
-          <div>
-            {status === "success" ? (
-              <div style={{ textAlign: "center", padding: "5rem 2rem", backgroundColor: "#FAF7F4", border: "1px solid #f0ebe3" }}>
-                <div style={{ width: "60px", height: "60px", backgroundColor: "#722F37", borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto 1.5rem" }}>
-                  <span style={{ color: "white", fontSize: "1.5rem" }}>✓</span>
-                </div>
-                <h2 style={{ fontFamily: "var(--font-playfair), Georgia, serif", fontSize: "1.75rem", fontWeight: 700, color: "#1a1a1a", marginBottom: "1rem" }}>Message Sent!</h2>
-                <p style={{ fontSize: "0.9rem", color: "#6b7280", marginBottom: "2rem", lineHeight: 1.7 }}>Thank you for reaching out. We will get back to you within 24 hours.</p>
-                <button onClick={() => setStatus("idle")} style={{ fontSize: "0.75rem", letterSpacing: "0.15em", textTransform: "uppercase", color: "#722F37", background: "none", border: "none", cursor: "pointer", borderBottom: "1px solid #722F37", paddingBottom: "2px", fontFamily: "inherit" }}>
-                  Send Another Message
-                </button>
+        {/* Main */}
+        <div className="container-custom" style={{ paddingTop: "5rem", paddingBottom: "6rem" }}>
+          <div className="cform-grid">
+
+            {/* Contact Info */}
+            <div>
+              <h2 style={{ fontFamily: "var(--font-playfair), Georgia, serif", fontSize: "1.5rem", fontWeight: 700, color: "#1a1a1a", marginBottom: "2.5rem" }}>Reach Us Directly</h2>
+              <div style={{ display: "flex", flexDirection: "column", gap: "2rem", marginBottom: "3rem" }}>
+                {contactInfo.map((item) => {
+                  const Icon = item.icon;
+                  return (
+                    <div key={item.label} style={{ display: "flex", alignItems: "flex-start", gap: "1.25rem" }}>
+                      <div style={{ width: "44px", height: "44px", backgroundColor: "#FAF7F4", border: "1px solid #f0ebe3", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
+                        <Icon size={16} style={{ color: "#722F37" }} />
+                      </div>
+                      <div>
+                        <p style={{ fontSize: "0.65rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "#9ca3af", marginBottom: "0.25rem", fontWeight: 500 }}>{item.label}</p>
+                        <p style={{ fontSize: "0.95rem", color: "#1a1a1a", fontWeight: 500 }}>{item.value}</p>
+                      </div>
+                    </div>
+                  );
+                })}
               </div>
-            ) : (
+              <div style={{ borderTop: "1px solid #f0ebe3", paddingTop: "2rem" }}>
+                <p style={{ fontSize: "0.85rem", color: "#6b7280", marginBottom: "1.25rem", lineHeight: 1.7 }}>Prefer to chat directly? Reach us on WhatsApp for faster responses.</p>
+                <a href="https://wa.me/2348000000000" target="_blank" rel="noopener noreferrer"
+                  style={{ display: "inline-flex", alignItems: "center", gap: "0.75rem", backgroundColor: "#25D366", color: "white", padding: "0.875rem 1.75rem", fontSize: "0.8rem", fontWeight: 600, letterSpacing: "0.15em", textTransform: "uppercase", textDecoration: "none" }}>
+                  <MessageCircle size={16} />
+                  Chat on WhatsApp
+                </a>
+              </div>
+            </div>
+
+            {/* Form */}
+            <div>
               <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: "1.5rem" }}>
                 <div className="cinput-row">
                   <div>
@@ -153,10 +158,10 @@ export default function ContactPage() {
                   {status === "loading" ? "Sending..." : "Send Message"}
                 </button>
               </form>
-            )}
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }
