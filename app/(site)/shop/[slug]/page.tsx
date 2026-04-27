@@ -16,7 +16,7 @@ export default async function ProductDetailPage({ params }: Props) {
   if (!product) notFound();
 
   const msg = ["Hi I am interested in ordering the ", product.name, " (", formatPrice(product.price), "). Please provide more details."].join("");
-  const whatsappLink = generateWhatsAppLink("+2348000000000", msg);
+  const whatsappLink = generateWhatsAppLink("+2349043371380", msg);
 
   return (
     <div style={{ minHeight: "100vh", backgroundColor: "white" }}>

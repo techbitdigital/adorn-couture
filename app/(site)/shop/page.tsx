@@ -54,7 +54,7 @@ export default function ShopPage() {
         <p className="tag" style={{ marginBottom: "1rem", display: "block" }}>Custom Orders</p>
         <h2 style={{ fontFamily: "var(--font-playfair), Georgia, serif", fontSize: "clamp(1.5rem, 3vw, 2.5rem)", fontWeight: 700, color: "#1a1a1a", marginBottom: "1rem" }}>Can't Find What You're Looking For?</h2>
         <p style={{ fontSize: "0.95rem", color: "#6b7280", marginBottom: "2rem", maxWidth: "400px", margin: "0 auto 2rem", lineHeight: 1.8 }}>We offer custom made-to-measure pieces. Reach out via WhatsApp to discuss your perfect outfit.</p>
-        <a href="https://wa.me/2348000000000" target="_blank" rel="noopener noreferrer" style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", backgroundColor: "#25D366", color: "white", padding: "0.875rem 2.5rem", fontSize: "0.8rem", fontWeight: 500, letterSpacing: "0.15em", textTransform: "uppercase", textDecoration: "none" }}>Order via WhatsApp</a>
+        <a href="https://wa.me/2349043371380" target="_blank" rel="noopener noreferrer" style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", backgroundColor: "#25D366", color: "white", padding: "0.875rem 2.5rem", fontSize: "0.8rem", fontWeight: 500, letterSpacing: "0.15em", textTransform: "uppercase", textDecoration: "none" }}>Order via WhatsApp</a>
       </div>
     </div>
   );
