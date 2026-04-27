@@ -1,7 +1,8 @@
 "use client";
 import { useState } from "react";
 import { courses } from "@/lib/data/courses";
-import SuccessModal from "@/components/ui/SuccessModal";
+import dynamic from "next/dynamic";
+const SuccessModal = dynamic(() => import("@/components/ui/SuccessModal"), { ssr: false });
 
 export default function ApplyPage() {
   const [showModal, setShowModal] = useState(false);

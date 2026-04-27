@@ -1,7 +1,8 @@
 "use client";
 import { useState } from "react";
 import { Phone, Mail, MapPin, MessageCircle, Clock } from "lucide-react";
-import SuccessModal from "@/components/ui/SuccessModal";
+import dynamic from "next/dynamic";
+const SuccessModal = dynamic(() => import("@/components/ui/SuccessModal"), { ssr: false });
 
 export default function ContactPage() {
   const [showModal, setShowModal] = useState(false);
