@@ -13,12 +13,12 @@ interface SuccessModalProps {
 export default function SuccessModal({ isOpen, onClose, type, name }: SuccessModalProps) {
   useEffect(() => {
     if (isOpen) {
-      document.body.style.overflow = "hidden";
+      if (typeof window !== "undefined") document.body.style.overflow = "hidden";
     } else {
-      document.body.style.overflow = "unset";
+      if (typeof window !== "undefined") document.body.style.overflow = "unset";
     }
     return () => {
-      document.body.style.overflow = "unset";
+      if (typeof window !== "undefined") document.body.style.overflow = "unset";
     };
   }, [isOpen]);
 
